@@ -1,20 +1,22 @@
-Gaming Laptop API
+# Gaming Laptop API
 
-Database Tables: GamingLaptops and GraphicsCards
+### Database Tables: 
 
-HTTP Methods + Endpoints:
+GamingLaptops and GraphicsCards
 
-GET: api/GraphicsCards
-GET: api/GraphicsCards/id
-GET: api/GamingLaptops
-GET: api/GamingLaptops/id
-POST: api/GraphicsCards
-DELETE: api/GraphicsCards/id
-Due to a foreign key constraint, first delete the laptops of the list within the GraphicsCard object at id, using endpoint number 7, before deleting the GraphicsCard object
-DELETE: api/GamingLaptops/id
-For id, use GraphicsCardId instead of LaptopId
+### HTTP Methods + Endpoints:
 
-Sample Request Body for POST on api/GraphicsCards:
+1. GET: api/GraphicsCards
+2. GET: api/GraphicsCards/id
+3. GET: api/GamingLaptops
+4. GET: api/GamingLaptops/id
+5. POST: api/GraphicsCards
+6. DELETE: api/GraphicsCards/id
+    1. Due to a foreign key constraint, first delete the laptops of the list within the GraphicsCard object at id, using endpoint number 7, before deleting the GraphicsCard object
+7. DELETE: api/GamingLaptops/id
+    i. For id, use GraphicsCardId instead of LaptopId
+
+### Sample Request Body for POST on api/GraphicsCards:
 
 {
     "GraphicsCardName": "AMD Radeon RX 6600M",
@@ -70,18 +72,18 @@ Sample Request Body for POST on api/GraphicsCards:
     ]
 }
  
-Response Model Properties:
-statusCode: 200 on success, 400 on failure
-statusDescription: varies depending on HTTP method, endpoint, and of course, the success or failure of the request
+### Response Model Properties:
+1. statusCode: 200 on success, 400 on failure
+2. statusDescription: varies depending on HTTP method, endpoint, and of course, the success or failure of the request
 gamingLaptops (for GET and POST on api/GamingLaptops) - contains either all the GamingLaptop objects in the database or a certain GamingLaptop object, depending on the endpoint  
-graphicsCards (for GET and POST on api/GraphicsCards) - contains either all the GraphicsCard objects in the database or a certain GraphicsCard object, depending on the endpoint  
+3. graphicsCards (for GET and POST on api/GraphicsCards) - contains either all the GraphicsCard objects in the database or a certain GraphicsCard object, depending on the endpoint  
  
-Notes:
+### Notes:
 
-I originally planned on having a third, Processors table, but I decided to take it out and have it as a column within my GamingLaptops Table
+1. I originally planned on having a third, Processors table, but I decided to take it out and have it as a column within my GamingLaptops Table
 Reason; In my GraphicsCard class, I have a list property, Laptops, which holds all the laptops that contain a specific graphics card. If I were to have a Processor class, I would need to have another list of laptops within it, holding all the laptops that contain a processor. However, since every gaming laptop has a processor and a graphics card, this would mean that if this database was fully complete, the GamingLaptops table would have a duplicate for each distinct laptop within it (one from the GraphicsCard class, and one from the Processors class). There is a probably a way to tackle this issue, but to keep it simple while adhering to the requirements of this project, I chose to make Processor a column in my GamingLaptops table while keeping the GraphicsCard table, as a graphics card is more relevant for gaming than a processor
-For deletion on api/GamingLaptops/id, I decided to delete the list of laptops referring to the id of the graphics card, not the laptop, because I thought that since I was adding laptops to the database as lists, through my GraphicsCard class, then it only makes sense to remove those same lists when removing laptops.  
-POST does not have a failure response consistent with my response model because the program already checks for a valid graphicsCard object in the argument, before the code inside the method is checked; if the object is null, the program will return its own failure response without checking the code in the method (similar explanation present in comments of POST method in GraphicsCardsController.cs)
+2. For deletion on api/GamingLaptops/id, I decided to delete the list of laptops referring to the id of the graphics card, not the laptop, because I thought that since I was adding laptops to the database as lists, through my GraphicsCard class, then it only makes sense to remove those same lists when removing laptops.  
+3. POST does not have a failure response consistent with my response model because the program already checks for a valid graphicsCard object in the argument, before the code inside the method is checked; if the object is null, the program will return its own failure response without checking the code in the method (similar explanation present in comments of POST method in GraphicsCardsController.cs)
 
 
 
