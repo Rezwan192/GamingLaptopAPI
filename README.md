@@ -14,7 +14,7 @@ GamingLaptops and GraphicsCards
 6. DELETE: api/GraphicsCards/id
     1. Due to a foreign key constraint, first delete the laptops of the list within the GraphicsCard object at id, using endpoint number 7, before deleting the GraphicsCard object
 7. DELETE: api/GamingLaptops/id
-    i. For id, use GraphicsCardId instead of LaptopId
+    1. For id, use GraphicsCardId instead of LaptopId
 
 ### Sample Request Body for POST on api/GraphicsCards:
 
