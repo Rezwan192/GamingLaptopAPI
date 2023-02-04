@@ -80,7 +80,7 @@ gamingLaptops (for GET and POST on api/GamingLaptops) - contains either all the 
  
 ### Notes:
 
-1. I originally planned on having a third, Processors table, but I decided to take it out and have it as a column within my GamingLaptops Table
+1. I originally planned on having a third, Processors table, but I decided to take it out and have it as a column within my GamingLaptops Table. 
 Reason: In my GraphicsCard class, I have a list property, Laptops, which holds all the laptops that contain a specific graphics card. If I were to have a Processor class, I would need to have another list of laptops within it, holding all the laptops that contain a processor. However, since every gaming laptop has a processor and a graphics card, this would mean that if this database was fully complete, the GamingLaptops table would have a duplicate for each distinct laptop within it (one from the GraphicsCard class, and one from the Processors class). While there may be a better way to tackle this issue, I chose to make Processor a column in my GamingLaptops table while keeping the GraphicsCard table, as a graphics card is more relevant for gaming than a processor
 2. For deletion on api/GamingLaptops/id, I decided to delete the list of laptops referring to the id of the graphics card, not the laptop, because I thought that since I was adding laptops to the database as lists, through my GraphicsCard class, then it only makes sense to remove those same lists when removing laptops.  
 
